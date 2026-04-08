@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gimik this Saturday?</title>
+    <title>Saturday Night Gimik</title>
     <style>
         body {
             display: flex;
@@ -12,26 +12,27 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #ffe4e1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Dark lounge vibe */
+            background-color: #1a1a1a; 
+            background-image: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            font-family: 'Georgia', serif;
             text-align: center;
+            color: #e0e0e0;
+            overflow: hidden;
         }
 
         #container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        img {
-            width: 200px;
+            background: #262626;
+            padding: 40px;
             border-radius: 15px;
-            margin-bottom: 20px;
+            border: 1px solid #d4af37; /* Gold border like Black Label */
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
         }
 
         h1 {
-            color: #d63384;
+            color: #d4af37; /* Gold */
+            text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 30px;
         }
 
@@ -40,25 +41,35 @@
             gap: 20px;
             justify-content: center;
             align-items: center;
-            min-height: 100px;
+            min-height: 120px;
         }
 
         button {
-            padding: 10px 25px;
+            padding: 12px 30px;
             font-size: 18px;
-            border: none;
-            border-radius: 10px;
+            font-weight: bold;
+            border: 2px solid transparent;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-transform: uppercase;
         }
 
+        /* Black Label Style */
         #yesBtn {
-            background-color: #4caf50;
-            color: white;
+            background-color: #000;
+            color: #d4af37;
+            border-color: #d4af37;
         }
 
+        #yesBtn:hover {
+            background-color: #d4af37;
+            color: #000;
+        }
+
+        /* Bacardi Red Style */
         #noBtn {
-            background-color: #f44336;
+            background-color: #7d0000;
             color: white;
             position: relative;
         }
@@ -66,24 +77,31 @@
         .hidden {
             display: none;
         }
+
+        .drink-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div id="container">
         <div id="main-content">
-            <img id="display-img" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXN3ZzZicHdzbmJueXN3ZzZicHdzbmJueXN3ZzZicHdzbmJueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="cute cat">
+            <div class="drink-icon">🥃 🍷 🍾</div>
             <h1 id="question">Gimik this Saturday night?</h1>
+            <p style="color: #888;">Jack, Black, or Bacardi?</p>
             
             <div class="buttons">
-                <button id="yesBtn" onclick="celebrate()">Yes</button>
-                <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+                <button id="yesBtn" onclick="celebrate()">Let's Pour!</button>
+                <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">Pass</button>
             </div>
         </div>
 
         <div id="success-message" class="hidden">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXN3ZzZicHdzbmJueXN3ZzZicHdzbmJueXN3ZzZicHdzbmJueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/26AHON8E3006a8KqI/giphy.gif" alt="celebration">
-            <h1>YAYYY! See you then! 🎉</h1>
+            <div class="drink-icon">🍻 🔥 🥂</div>
+            <h1 style="color: #fff;">CHEERS! 🥂</h1>
+            <p>Get the glasses ready. It's going to be a long night.</p>
         </div>
     </div>
 
@@ -97,32 +115,32 @@
         let noClicks = 0;
 
         const messages = [
-            "Are you sure?",
-            "Really sure??",
-            "Think again!",
-            "Last chance!",
-            "Surely not?",
-            "You're breaking my heart ;(",
-            "PLEASEEE",
-            "I'm gonna cry..."
+            "Are you sober?",
+            "One shot only?",
+            "Bacardi is waiting...",
+            "Don't be a KJ!",
+            "Jack is disappointed",
+            "Last chance for a refill!",
+            "The bar is closing!",
+            "Just say YES 🥃"
         ];
 
         function moveNoButton() {
-            // Change the text of the "No" button
+            // Update button text
             if (noClicks < messages.length) {
                 noBtn.innerHTML = messages[noClicks];
             }
             
-            // Make the "Yes" button bigger
+            // Grow the "Yes" button
             yesSize += 15;
             yesBtn.style.fontSize = yesSize + "px";
             yesBtn.style.padding = (yesSize/2) + "px " + (yesSize) + "px";
 
-            // Move the "No" button to a random position
+            // Move the "No" button randomly
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
-            noBtn.style.position = 'absolute';
+            noBtn.style.position = 'fixed'; // Fixed works better for "running away"
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
 
@@ -132,8 +150,7 @@
         function celebrate() {
             mainContent.classList.add('hidden');
             successMessage.classList.remove('hidden');
-            // Stop the no button from floating around
-            noBtn.classList.add('hidden');
+            noBtn.style.display = 'none';
         }
     </script>
 </body>
